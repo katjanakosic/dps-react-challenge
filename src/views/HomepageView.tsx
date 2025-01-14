@@ -3,6 +3,7 @@
 
 import { Box, Container } from '@mui/material';
 import FilterBar from '../components/FilterBar';
+import UserTable from '../components/UserTable';
 
 function HomepageView() {
 	return (
@@ -17,14 +18,18 @@ function HomepageView() {
 		>
 			<Box
 				display="flex"
-				justifyContent="center"
+				flexDirection="column"
+				justifyContent="space-between"
 				alignItems="center"
 				height="90vh"
 				width="85%"
 				bgcolor="#dce6f3"
 				borderRadius="16px"
+        padding={3}
+				gap={2}
 			>
-				<FilterBar/>
+				<FilterBar />
+				<UserTable />
 			</Box>
 		</Container>
 	);
