@@ -9,13 +9,15 @@ function HomepageView() {
 	const [users, setUsers] = useState<User[]>([]);
 	const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
+	const [cities, setCities] = useState<string[]>([]);
+
 	useEffect(() => {
 		const getUsers = async () => {
 			try {
-        // Rename to apiUsers to avoid confusion with state variable 'users'
+				// Rename to apiUsers to avoid confusion with state variable 'users'
 				const { users: apiUsers } = await fetchUsers();
-        
-        // Transform dummy users to match User interface
+
+				// Transform dummy users to match User interface
 				const transformed: User[] = apiUsers.map((u: any) => ({
 					name: `${u.firstName} ${u.lastName}`,
 					city: u.address?.city || '',
@@ -23,6 +25,12 @@ function HomepageView() {
 				}));
 				setUsers(transformed);
 				setFilteredUsers(transformed);
+
+        // Unique list of cities
+				const uniqueCities = Array.from(
+					new Set(transformed.map((u) => u.city))
+				);
+				setCities(uniqueCities);
 			} catch (err) {
 				console.error(err);
 			}
