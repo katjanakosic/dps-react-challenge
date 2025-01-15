@@ -11,6 +11,13 @@ function HomepageView() {
 
 	const [cities, setCities] = useState<string[]>([]);
 
+  // State variables for filtering
+  const [searchName, setSearchName] = useState<string>('');
+  const [selectedCity, setSelectedCity] = useState<string>('');
+
+  // For dynamic filtering as one types
+  const [tempSearchName, setTempSearchName] = useState<string>('');
+
 	useEffect(() => {
 		const getUsers = async () => {
 			try {
@@ -26,7 +33,7 @@ function HomepageView() {
 				setUsers(transformed);
 				setFilteredUsers(transformed);
 
-        // Unique list of cities
+				// Unique list of cities
 				const uniqueCities = Array.from(
 					new Set(transformed.map((u) => u.city))
 				);
@@ -37,6 +44,23 @@ function HomepageView() {
 		};
 		getUsers();
 	}, []);
+
+  // Re-filter whenever users, searchName, or selectedCity changes
+	useEffect(() => {
+		let updated = [...users];
+
+		if (searchName.trim() !== '') {
+			updated = updated.filter((u) =>
+				u.name.toLowerCase().includes(searchName.toLowerCase())
+			);
+		}
+
+		if (selectedCity) {
+			updated = updated.filter((u) => u.city === selectedCity);
+		}
+
+		setFilteredUsers(updated);
+	}, [users, searchName, selectedCity]);
 
 	return (
 		<Container
