@@ -10,7 +10,7 @@ function App() {
   return (
     <Box
       style={{
-        background: "#a6bae2",
+        background: "#64bce8",
         width: "100%",
         minHeight: "100vh",
       }}

@@ -59,7 +59,14 @@ function UserTable({ users, highlightOldest }: UserTableProps) {
 		>
 			<TableContainer component={Paper}>
 				<Table aria-label="user table">
-					<TableHead>
+					<TableHead
+						sx={{
+							backgroundColor: '#eba943',
+							'& .MuiTableCell-head': {
+								fontWeight: 'bold',
+							},
+						}}
+					>
 						<TableRow>
 							<TableCell>Name</TableCell>
 							<TableCell align="left">City</TableCell>
@@ -78,7 +85,7 @@ function UserTable({ users, highlightOldest }: UserTableProps) {
 									sx={
 										isOldest
 											? {
-													backgroundColor: '#ccccff',
+													backgroundColor: '#b1448b',
 													fontWeight: 'bold',
 											  }
 											: {}
