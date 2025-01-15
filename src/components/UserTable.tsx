@@ -91,7 +91,13 @@ function UserTable({ users, highlightOldest }: UserTableProps) {
 										{user.city}
 									</TableCell>
 									<TableCell align="left">
-										{user.birthday}
+										{new Date(
+											user.birthday
+										).toLocaleDateString('en-GB', {
+											day: '2-digit',
+											month: 'short',
+											year: 'numeric',
+										})}
 									</TableCell>
 								</TableRow>
 							);
