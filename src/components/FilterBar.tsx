@@ -10,6 +10,7 @@ import {
 	FormControlLabel,
 	Checkbox,
 } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { ChangeEvent } from 'react';
 
 interface FilterBarProps {
@@ -45,13 +46,13 @@ function FilterBar({
 	};
 
 	return (
-		<Box display="flex" justifyContent="space-between" width="70%">
+		<Grid container justifyContent="space-evenly" spacing={20} pb={4} width="70%">
 			{/* Name Filter */}
-			<Box
+			<Grid
+                size={{ xs: 12, md: 4}}
 				display="flex"
 				flexDirection="column"
 				justifyContent="flex-start"
-				minWidth={260}
 			>
 				<Typography sx={{ mb: 2 }}>Name</Typography>
 				<TextField
@@ -75,14 +76,14 @@ function FilterBar({
 						},
 					}}
 				/>
-			</Box>
+			</Grid>
 
 			{/* City Filter */}
-			<Box
+			<Grid
+                size={{ xs: 12, md: 4 }}
 				display="flex"
 				flexDirection="column"
 				justifyContent="flex-start"
-				sx={{ minWidth: 240 }}
 			>
 				<Typography sx={{ mb: 2 }}>City</Typography>
 
@@ -129,9 +130,9 @@ function FilterBar({
 						))}
 					</Select>
 				</FormControl>
-			</Box>
+			</Grid>
 
-			<Box>
+			<Grid size={{ xs: 'auto', md: 4 }}>
 				<Box marginBottom={6} />
 				<FormControlLabel
 					control={
@@ -148,8 +149,8 @@ function FilterBar({
 					label="Highlight oldest per city"
 					labelPlacement="start"
 				/>
-			</Box>
-		</Box>
+			</Grid>
+		</Grid>
 	);
 }
 
