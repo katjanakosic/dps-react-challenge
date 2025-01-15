@@ -46,7 +46,7 @@ function FilterBar({
 	};
 
 	return (
-		<Grid container justifyContent="space-evenly" spacing={20} pb={4} width="70%">
+		<Grid container justifyContent="space-between" spacing={2} pb={4} width="70%">
 			{/* Name Filter */}
 			<Grid
                 size={{ xs: 12, md: 4}}
