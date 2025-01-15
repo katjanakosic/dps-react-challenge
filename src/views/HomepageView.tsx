@@ -1,7 +1,7 @@
 import { Box, Container } from '@mui/material';
+import { useEffect, useState } from 'react';
 import FilterBar from '../components/FilterBar';
 import UserTable from '../components/UserTable';
-import { useState, useEffect } from 'react';
 import { fetchUsers } from '../services/api';
 import User from '../types/User';
 
@@ -9,14 +9,15 @@ function HomepageView() {
 	const [users, setUsers] = useState<User[]>([]);
 	const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
+	// State variables for filtering
+	const [searchName, setSearchName] = useState<string>('');
+	const [selectedCity, setSelectedCity] = useState<string>('');
+	const [highlightOldest, setHighlightOldest] = useState<boolean>(false);
+
 	const [cities, setCities] = useState<string[]>([]);
 
-  // State variables for filtering
-  const [searchName, setSearchName] = useState<string>('');
-  const [selectedCity, setSelectedCity] = useState<string>('');
-
-  // For dynamic filtering as one types
-  const [tempSearchName, setTempSearchName] = useState<string>('');
+	// For dynamic filtering as one types
+	const [tempSearchName, setTempSearchName] = useState<string>('');
 
 	useEffect(() => {
 		const getUsers = async () => {
@@ -30,6 +31,7 @@ function HomepageView() {
 					city: u.address?.city || '',
 					birthday: u.birthDate,
 				}));
+
 				setUsers(transformed);
 				setFilteredUsers(transformed);
 
@@ -42,10 +44,20 @@ function HomepageView() {
 				console.error(err);
 			}
 		};
+
 		getUsers();
 	}, []);
 
-  // Re-filter whenever users, searchName, or selectedCity changes
+	// Debounce logic for name input (1 second)
+	useEffect(() => {
+		const handler = setTimeout(() => {
+			setSearchName(tempSearchName);
+		}, 1000);
+
+		return () => clearTimeout(handler);
+	}, [tempSearchName]);
+
+	// Re-filter whenever users, searchName, or selectedCity changes
 	useEffect(() => {
 		let updated = [...users];
 
@@ -84,8 +96,19 @@ function HomepageView() {
 				padding={3}
 				gap={2}
 			>
-				<FilterBar />
-				<UserTable />
+				<FilterBar
+					tempSearchName={tempSearchName}
+					setTempSearchName={setTempSearchName}
+					selectedCity={selectedCity}
+					setSelectedCity={setSelectedCity}
+					cities={cities}
+					highlightOldest={highlightOldest}
+					setHighlightOldest={setHighlightOldest}
+				/>
+				<UserTable
+					users={filteredUsers}
+					highlightOldest={highlightOldest}
+				/>
 			</Box>
 		</Container>
 	);
