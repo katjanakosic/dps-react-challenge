@@ -1,9 +1,10 @@
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import FilterBar from '../components/FilterBar';
 import UserTable from '../components/UserTable';
 import { fetchUsers } from '../services/api';
 import User from '../types/User';
+import NotFound from '../assets/NotFound.svg';
 
 function HomepageView() {
 	const [users, setUsers] = useState<User[]>([]);
@@ -38,7 +39,9 @@ function HomepageView() {
 				// Unique list of cities
 				const uniqueCities = Array.from(
 					new Set(transformed.map((u) => u.city))
-				);
+				)
+					.filter(Boolean)
+					.sort((a, b) => a.localeCompare(b));
 				setCities(uniqueCities);
 			} catch (err) {
 				console.error(err);
@@ -105,10 +108,31 @@ function HomepageView() {
 					highlightOldest={highlightOldest}
 					setHighlightOldest={setHighlightOldest}
 				/>
-				<UserTable
-					users={filteredUsers}
-					highlightOldest={highlightOldest}
-				/>
+				{filteredUsers.length === 0 ? (
+					// If no users match the filters, show "Not Found" image & message
+					<Box
+						flex={1}
+						display="flex"
+						flexDirection="column"
+						justifyContent="center"
+						alignItems="center"
+						gap={2}
+					>
+						<img
+							src={NotFound}
+							alt="Not Found"
+							style={{ width: '400px', height: 'auto' }}
+						/>
+						<Typography variant="h5" sx={{color: "#44296d"}}>
+							Oops! No user with this name was found.
+						</Typography>
+					</Box>
+				) : (
+					<UserTable
+						users={filteredUsers}
+						highlightOldest={highlightOldest}
+					/>
+				)}
 			</Box>
 		</Container>
 	);
