@@ -48,6 +48,7 @@ This project offers a user-friendly, responsive interface to search for a user l
 1. Open http://localhost:3000 in your browser (Google Chrome is recommended).
 2. Enter a username in the search field on the homepage. Matching users will be displayed in the table below.
 3. Use the FilterBar to filter the displayed user list by city or birthday.
+4. Click on a user row to display their personal information.
 
 
 ## Requirements
@@ -61,16 +62,14 @@ This project offers a user-friendly, responsive interface to search for a user l
     * Highlight Feature: A checkbox that when checked, highlights the oldest users within each city.
 
 ### Extra Features
-- **Handling**: Handles the case that no matched users are found and displays a corresponding message.
+- **No Match Handling**: Handles the case that no matched users are found and displays a corresponding message.
+- **User Details Modal**: When a user clicks a row in the table, a modal that shows extra details about that user—like email, phone, and email provided by the dummyjson API is displayed. 
 - **Responsive UI**: The application is designed to work seamlessly on various screen sizes.
-- **DPS Styling**: Reflects the company's branding and colors.
-
-
+- **DPS Styling**: The application reflects the company's branding and colors.
 
 
 ## Future Improvements
 
 1. **Enhanced Filtering and Sorting**: Allow additional filtering options (e.g., age, maiden name, gender).
 2. **Dark Mode Toggle**: Provide a toggle in the UI that switches between light and dark themes.
-3. **User Details Modal**: When a user clicks a row in the table, open a modal that shows extra details about that user—like email, phone, or any other fields provided by the dummyjson API. 
 
