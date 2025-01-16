@@ -10,18 +10,18 @@ This project structure focuses on the most important files in this project.
 dps-react-challenge
 ├── README.md
 └── src
-    ├── node_modules                Installed node modules (do not touch)
-    ├── assets                      Contains assets for display
-    ├── components                  Contains custom built UI components used in the views
-        ├── FilterBar.tsx           Component for filtering users by name, city, or birthday
-        └── UserTable.tsx           Component for displaying the filtered user list
+    ├── node_modules                    Installed node modules (do not touch)
+    ├── assets                          Contains assets for display
+    ├── components                      Contains custom built UI components used in the views
+    │   ├── FilterBar.tsx               Component for filtering users by name, city, or birthday
+    │   └── UserTable.tsx               Component for displaying the filtered user list
     ├── services                    
-        └── api.ts                  Defines API calls to the endpoint
-    ├── types                       Contains the interface that defines the structure of users
+    │   └── api.ts                      Defines API calls to the endpoint
+    ├── types                           Contains the interface that defines the structure of users
     ├── views
-        └── HomepageView.tsx        Main displayed page                         
-    ├── App.tsx                     Defines the main application component
-    └── main.tsx                    Sets up the React root and renders the App component into the DOM
+    │   └── HomepageView.tsx            Main displayed page                         
+    ├── App.tsx                         Defines the main application component
+    └── main.tsx                        Sets up the React root and renders the App component into the DOM
 
 ```
 
