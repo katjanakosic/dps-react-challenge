@@ -189,7 +189,7 @@ function HomepageView() {
 					</DialogContent>
 					<DialogActions>
 						<Button onClick={handleCloseModal} autoFocus>
-              Close
+							Close
 						</Button>
 					</DialogActions>
 				</Dialog>

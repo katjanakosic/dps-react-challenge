@@ -14,7 +14,7 @@ import User from '../types/User';
 interface UserTableProps {
 	users: User[];
 	highlightOldest: boolean;
-    onRowClick: (user: User) => void;
+	onRowClick: (user: User) => void;
 }
 
 function UserTable({ users, highlightOldest, onRowClick }: UserTableProps) {
@@ -83,9 +83,9 @@ function UserTable({ users, highlightOldest, onRowClick }: UserTableProps) {
 							return (
 								<TableRow
 									key={`${user.name}-${user.city}-${user.birthday}`}
-                                    onClick={() => onRowClick(user)}
-                                    hover
-                                    style={{ cursor: 'pointer' }}
+									onClick={() => onRowClick(user)}
+									hover
+									style={{ cursor: 'pointer' }}
 									sx={
 										isOldest
 											? {
