@@ -1,4 +1,13 @@
-import { Box, Container, Typography } from '@mui/material';
+import {
+	Box,
+	Button,
+	Container,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import FilterBar from '../components/FilterBar';
 import UserTable from '../components/UserTable';
@@ -20,6 +29,21 @@ function HomepageView() {
 	// For dynamic filtering as one types
 	const [tempSearchName, setTempSearchName] = useState<string>('');
 
+	// Modal-related states
+	const [selectedUser, setSelectedUser] = useState<User | null>(null);
+	const [openModal, setOpenModal] = useState<boolean>(false);
+
+	// Handler to open modal with the clicked user
+	const handleRowClick = (user: User) => {
+		setSelectedUser(user);
+		setOpenModal(true);
+	};
+
+	// Handler to close the modal
+	const handleCloseModal = () => {
+		setOpenModal(false);
+	};
+
 	useEffect(() => {
 		const getUsers = async () => {
 			try {
@@ -31,6 +55,9 @@ function HomepageView() {
 					name: `${u.firstName} ${u.lastName}`,
 					city: u.address?.city || '',
 					birthday: u.birthDate,
+					email: u.email,
+					phone: u.phone,
+					age: u.age,
 				}));
 
 				setUsers(transformed);
@@ -123,7 +150,7 @@ function HomepageView() {
 							alt="Not Found"
 							style={{ width: '400px', height: 'auto' }}
 						/>
-						<Typography variant="h5" sx={{color: "#44296d"}}>
+						<Typography variant="h5" sx={{ color: '#44296d' }}>
 							Oops! No user with this name was found.
 						</Typography>
 					</Box>
@@ -131,9 +158,42 @@ function HomepageView() {
 					<UserTable
 						users={filteredUsers}
 						highlightOldest={highlightOldest}
+						onRowClick={handleRowClick}
 					/>
 				)}
 			</Box>
+
+			{/* User Details Modal */}
+			{selectedUser && (
+				<Dialog open={openModal} onClose={handleCloseModal} fullWidth>
+					<DialogTitle>User Details</DialogTitle>
+					<DialogContent dividers>
+						<Typography variant="subtitle1">
+							<strong>Name:</strong> {selectedUser.name}
+						</Typography>
+						{selectedUser.email && (
+							<Typography variant="subtitle1">
+								<strong>Email:</strong> {selectedUser.email}
+							</Typography>
+						)}
+						{selectedUser.phone && (
+							<Typography variant="subtitle1">
+								<strong>Phone:</strong> {selectedUser.phone}
+							</Typography>
+						)}
+						{typeof selectedUser.age === 'number' && (
+							<Typography variant="subtitle1">
+								<strong>Age:</strong> {selectedUser.age}
+							</Typography>
+						)}
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={handleCloseModal} autoFocus>
+              Close
+						</Button>
+					</DialogActions>
+				</Dialog>
+			)}
 		</Container>
 	);
 }
