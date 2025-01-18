@@ -63,7 +63,7 @@ This project offers a user-friendly, responsive interface to search for a user l
 
 ### Extra Features
 - **No Match Handling**: Handles the case that no matched users are found and displays a corresponding message.
-- **User Details Modal**: When a user clicks a row in the table, a modal that shows extra details about that user—like email, phone, and email provided by the dummyjson API is displayed. 
+- **User Details Modal**: When a user clicks a row in the table, a modal that shows extra details about that user—like email, phone, and age provided by the dummyjson API is displayed. 
 - **Responsive UI**: The application is designed to work seamlessly on various screen sizes.
 - **DPS Styling**: The application reflects the company's branding and colors.
 
