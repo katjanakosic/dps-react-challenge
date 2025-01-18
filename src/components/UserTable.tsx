@@ -55,7 +55,7 @@ function UserTable({ users, highlightOldest, onRowClick }: UserTableProps) {
 			width="70%"
 			sx={{
 				maxHeight: '70vh',
-				overflow: 'auto', // Allow scrolling
+				overflow: 'auto', // Allow scrolling within table
 			}}
 		>
 			<TableContainer component={Paper}>

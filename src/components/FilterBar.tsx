@@ -138,6 +138,7 @@ function FilterBar({
 				</FormControl>
 			</Grid>
 
+			{/* Checkbox Filter */}
 			<Grid size={{ xs: 'auto', md: 4 }}>
 				<Box marginBottom={6} />
 				<FormControlLabel
